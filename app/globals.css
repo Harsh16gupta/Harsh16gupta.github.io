@@ -1,0 +1,181 @@
+/* ✅ Correct Google Fonts imports */
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&display=swap");
+@plugin "@tailwindcss/typography";
+@import "tailwindcss";
+/* remove this line if you don't have it installed */
+@import "tw-animate-css";
+@import "cal-heatmap/cal-heatmap.css";
+
+
+@custom-variant dark (&:is(.dark *));
+
+/* Custom selection color */
+::selection {
+  background: #c7c6c6;
+
+  /* bright yellow highlight */
+  color: #000;
+  /* black text */
+}
+
+/* Optional: for Firefox */
+::-moz-selection {
+  background: #58553e;
+  color: #000;
+}
+
+
+/* === Custom theme variables === */
+@theme inline {
+  --color-primary: var(--color-neutral-800);
+  --color-secondary: var(--color-neutral-600);
+  --font-custom: "Instrument Serif", serif;
+  --font-custom2: "Instrument Sans", sans-serif;
+  --color-border: var(--border);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-background: var(--background);
+}
+
+/* ✅ Move this OUTSIDE of @theme inline */
+:root {
+  --shadow-input: 0px 2px 3px -1px rgba(0, 0, 0, 0.1),
+    0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+    0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+  --section-shadow: rgba(34, 42, 53, 0.06) 0px 0px 24px, rgba(0, 0, 0, 0.05) 0px 1px 1px,
+    rgba(34, 42, 53, 0.04) 0px 0px 0px 1px, rgba(34, 42, 53, 0.08) 0px 0px 4px,
+    rgba(47, 48, 55, 0.05) 0px 16px 68px,
+    rgba(255, 255, 255, 0.1) 0px 1px 0px inset;
+  --background: oklch(1 0 0);
+  --muted: oklch(0.967 0.001 286.375);
+  --muted-foreground: oklch(0.552 0.016 285.938);
+  --border: oklch(0.92 0.004 286.32);
+  --pattern-fg: #d1d5db;
+}
+
+.dark {
+  --color-primary: var(--color-neutral-100);
+  --color-secondary: var(--color-neutral-300);
+  --background: oklch(0.141 0.005 285.823);
+  --muted: oklch(0.274 0.006 286.033);
+  --muted-foreground: oklch(0.705 0.015 286.067);
+  --border: oklch(0.274 0.006 286.033);
+  --pattern-fg: #404040;
+
+}
+
+/* === Sleek Modern Header Shift & Reveal (Elara style) === */
+.link--elara {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link--elara::before {
+  content: "/";
+  font-weight: 300;
+  margin-right: 0.5rem;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--color-neutral-400);
+}
+
+.link--elara:hover::before {
+  opacity: 0.5;
+  transform: translateX(0);
+}
+
+.link--elara:hover {
+  transform: translateX(4px);
+}
+
+/* === Prose Styling for Dark Mode === */
+.prose {
+  @apply text-neutral-900 dark:text-neutral-100;
+}
+
+.prose p {
+  @apply text-neutral-700 dark:text-neutral-300;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply text-neutral-900 dark:text-neutral-50;
+}
+
+.prose a {
+  @apply text-blue-600 dark:text-blue-400 hover:underline;
+}
+
+.prose code {
+  @apply bg-blue-900 dark:bg-blue-900 text-blue-100 dark:text-blue-100 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.prose pre {
+  @apply bg-blue-900 dark:bg-blue-900 text-blue-100 dark:text-blue-100 p-4 rounded-lg overflow-x-auto border border-blue-800 dark:border-blue-800;
+}
+
+
+
+
+
+.prose strong {
+  @apply text-neutral-900 dark:text-neutral-50;
+}
+
+.prose ul,
+.prose ol {
+  @apply text-neutral-700 dark:text-neutral-300;
+}
+
+.prose li {
+  @apply text-neutral-700 dark:text-neutral-300;
+}
+
+
+/* === Modern Underline Wipe from Center (.link--carme) === */
+.link--carme {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-size: inherit;
+  font-weight: inherit;
+  transition: color 0.2s ease;
+}
+
+.link--carme::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link--carme:hover::after {
+  transform: scaleX(1);
+}
+
+@keyframes statusDotPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: scale(1.8);
+    opacity: 0.12;
+  }
+}

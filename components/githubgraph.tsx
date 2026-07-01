@@ -18,30 +18,37 @@ interface PR {
   closedAt?: string;
 }
 
-const GithubGraph = () => {
+interface GithubGraphProps {
+  showPRs?: boolean;
+}
+
+const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
   const { theme } = useTheme();
   const [prs, setPrs] = useState<PR[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
   const [filterType, setFilterType] = useState<"all" | "merged" | "open" | "closed">("all");
-  const [showPRSection, setShowPRSection] = useState(true);
-  const [closedPRIds, setClosedPRIds] = useState<Set<number>>(new Set());
+  const [closedPRIds] = useState<Set<number>>(new Set());
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const initialCount = 2;
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {
+    if (!showPRs) return;
     const fetchPRs = async () => {
       try {
         const searchQuery = filterType === "all"
@@ -103,15 +110,15 @@ const GithubGraph = () => {
     };
 
     fetchPRs();
-  }, [filterType]);
+  }, [filterType, showPRs]);
 
   return (
     <div>
-      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-2 -mx-2 md:-mx-14"></div>
+      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-2 -mx-8 md:-mx-20"></div>
 
 
       <h1 className="text-neutral-900 dark:text-neutral-50 font-custom font-bold  text-3xl tracking-tight  py-2"><span className="link--elara">Proof Of Work</span></h1>
-      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-2 md:-mx-14"></div>
+      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-8 md:-mx-20"></div>
       <p className=" font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-2 py-[7px]
            text-sm inline-block
           bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border mb-6"> I live spending time in open source,building real stuff and solving real problems</p>
@@ -158,7 +165,7 @@ const GithubGraph = () => {
           )}
         </div>
       </div>
-      {showPRSection && (
+      {showPRs && (
         <div className="mt-4">
           <div className="mb-1 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-neutral-900 dark:text-neutral-50 font-custom font-bold text-2xl tracking-tight">
@@ -221,14 +228,14 @@ const GithubGraph = () => {
                   ? "Active pull requests"
                   : "Closed pull requests"}
           </p>
-          <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-2 md:-mx-14 mt-6"></div>
+          <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-8 md:-mx-20 mt-6"></div>
 
           {loading ? (
             <div className="text-neutral-600 dark:text-neutral-400 font-custom2 text-sm mt-4">Loading pull requests...</div>
           ) : prs.length > 0 ? (
             <div>
               <div className="space-y-2 mt-5">
-                {prs.slice(0, showAll ? prs.length : initialCount).filter(pr => !closedPRIds.has(pr.id)).map((pr, index) => (
+                {prs.slice(0, showAll ? prs.length : initialCount).filter(pr => !closedPRIds.has(pr.id)).map((pr) => (
                   <div key={pr.id} className="group flex items-start gap-3 p-3 rounded-md transition-all duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-800/50 border border-transparent hover:border-neutral-300/50 dark:hover:border-neutral-700/50">
                     <div className="shrink-0 mt-0.5">
                       <div className={`w-1 h-1 rounded-full group-hover:scale-150 transition-transform duration-200 ${pr.state === "MERGED"

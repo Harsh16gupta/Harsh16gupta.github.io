@@ -16,18 +16,7 @@ export default async function BlogIndex() {
   return (
 
     <Container className="min-h-screen px-8 pt-24 md:p-20 md:pb-10 relative mx-auto">
-      <div
-        className="absolute right-0 top-0 h-full w-6 border-x border-x-(--pattern-fg)
-          bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)]
-          bg-size-[10px_10px] bg-fixed opacity-80 dark:opacity-12"
-      />
 
-      {/* LEFT BORDER */}
-      <div
-        className="absolute left-0 top-0 h-full w-6 border-x border-x-(--pattern-fg)
-          bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)]
-          bg-size-[10px_10px] bg-fixed opacity-80 dark:opacity-12"
-      />
       <div className="max-w-4xl mx-auto ">
 
         {/* Header */}

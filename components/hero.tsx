@@ -287,7 +287,7 @@ export default function Hero() {
       {/* 2. Dashed Divider (Matches layout borders elsewhere in the project) */}
       <motion.div
         variants={itemVariants}
-        className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 my-4 -mx-2 md:-mx-14"
+        className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 my-4 -mx-8 md:-mx-20"
       />
 
       {/* 3. Tagline */}

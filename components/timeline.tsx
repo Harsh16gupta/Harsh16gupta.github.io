@@ -148,10 +148,10 @@ export const Timeline = () => {
       <h1 className="text-3xl md:text-3xl font-bold font-custom tracking-tight text-neutral-950 dark:text-neutral-50 pb-2 mt-2">
         <span className="link--elara">Experiences</span>
       </h1>
-      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-2 md:-mx-14"></div>
+      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-8 md:-mx-20"></div>
       <div className="flex flex-col gap-4">
         {data.map((year, idx) => (
-          <div key={year.title} className="relative pb-2 -mx-2 md:-mx-14 px-2 md:px-14">
+          <div key={year.title} className="relative pb-2 -mx-8 md:-mx-20 px-8 md:px-20">
             {year.content.map((item, cidx) => {
               const isOpen = openIdx === idx * 100 + cidx;
               return (

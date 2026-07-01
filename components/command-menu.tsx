@@ -15,7 +15,8 @@ import {
     ArrowUp,
     ArrowDown,
     CornerDownLeft,
-    Copy
+    Copy,
+    Activity
 } from "lucide-react"
 import { SiX, SiLinkedin, SiGithub } from "react-icons/si"
 
@@ -88,11 +89,10 @@ export function CommandMenu() {
                 } else if (key === 'p') {
                     e.preventDefault()
                     runCommand(() => router.push("/projects"))
+                } else if (key === 'w') {
+                    e.preventDefault()
+                    runCommand(() => router.push("/proof-of-work"))
                 }
-                // else if (key === 'w') {
-                //     e.preventDefault()
-                //     runCommand(() => router.push("/blog"))
-                // }
 
                 // Links
                 else if (key === 'x') {
@@ -178,11 +178,11 @@ export function CommandMenu() {
                             <span>Go to Projects</span>
                             <CommandShortcut className="font-mono text-[10px] bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">shift + P</CommandShortcut>
                         </CommandItem>
-                        {/* <CommandItem onSelect={() => runCommand(() => router.push("/blog"))} className="rounded-lg py-3">
-                            <FileText className="mr-2 h-4 w-4 text-neutral-500" />
-                            <span>Go to Writing</span>
+                        <CommandItem onSelect={() => runCommand(() => router.push("/proof-of-work"))} className="rounded-lg py-3">
+                            <Activity className="mr-2 h-4 w-4 text-neutral-500" />
+                            <span>Go to Proof of Work</span>
                             <CommandShortcut className="font-mono text-[10px] bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">shift + W</CommandShortcut>
-                        </CommandItem> */}
+                        </CommandItem>
                     </CommandGroup>
 
                     <CommandSeparator className="my-2" />

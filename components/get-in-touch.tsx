@@ -8,13 +8,13 @@ import AnimatedButton from "@/components/ui/AnimatedButton";
 export default function GetInTouch() {
     return (
         <div className="w-full mt-8 mb-10 relative z-10">
-            <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-2 -mx-2 md:-mx-14"></div>
+            <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-2 -mx-8 md:-mx-20"></div>
             <div className="flex w-full justify-between items-center py-2">
                 <h1 className="text-3xl md:text-3xl font-bold font-custom tracking-tight text-neutral-900 dark:text-neutral-50">
                     <span className="link--elara">Get in touch</span>
                 </h1>
             </div>
-            <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-2 md:-mx-14"></div>
+            <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-8 md:-mx-20"></div>
 
             <div className="flex flex-col items-start space-y-6">
                 <p className="font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-2 py-[7px] text-sm inline-block bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border mb-6">

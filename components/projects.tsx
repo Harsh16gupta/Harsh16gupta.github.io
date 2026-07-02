@@ -1,6 +1,6 @@
 "use client";
 
-// Refined ProjectCard with Ambient Backgrounds by Narsi
+// Refined ProjectCard with Ambient Backgrounds
 import { useState, useEffect, useRef } from "react";
 import type { ComponentType } from "react";
 import { useTheme } from "next-themes";
@@ -243,7 +243,7 @@ const ProjectCard = ({
               </div>
             </motion.div>
 
-            {/* Floating screenshot - The signature Narsi move */}
+            {/* Floating screenshot */}
             <motion.div
               className="absolute bottom-0 left-1/2 w-[82%] rounded-t-[6px] bg-white dark:bg-neutral-950 p-[2px] pb-0 shadow-2xl z-20 border-x border-t border-neutral-200 dark:border-neutral-800"
               variants={{

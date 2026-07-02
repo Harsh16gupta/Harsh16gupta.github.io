@@ -1,17 +1,6 @@
 import React, { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import Image from 'next/image';
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiReact,
-  SiThreedotjs,
-  SiPrisma,
-  SiCloudflare,
-  SiLangchain,
-  SiNodedotjs,
-} from "react-icons/si";
-import { IconType } from "react-icons";
 
 type TechKey =
   | "next"
@@ -23,16 +12,7 @@ type TechKey =
   | "langchain"
   | "node";
 
-const iconMap: Record<TechKey, IconType> = {
-  next: SiNextdotjs,
-  ts: SiTypescript,
-  react: SiReact,
-  three: SiThreedotjs,
-  prisma: SiPrisma,
-  cloud: SiCloudflare,
-  langchain: SiLangchain,
-  node: SiNodedotjs,
-};
+
 
 const techNames: Record<TechKey, string> = {
   next: "Next.js",
@@ -64,7 +44,6 @@ type Data = {
 };
 
 export const Timeline = () => {
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
   // Track which experience is open (by index)
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
@@ -141,10 +120,8 @@ export const Timeline = () => {
       ],
     }
   ];
-
   return (
     <div>
-
       <h1 className="text-3xl md:text-3xl font-bold font-custom tracking-tight text-neutral-950 dark:text-neutral-50 pb-2 mt-2">
         <span className="link--elara">Experiences</span>
       </h1>

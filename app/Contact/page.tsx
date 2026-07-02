@@ -42,7 +42,7 @@ export default function Contact() {
       } else {
         toast.error("Something went wrong. Please try again.");
       }
-    } catch (error) {
+    } catch {
       toast.error("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -51,7 +51,7 @@ export default function Contact() {
 
   return (
     <div className="relative flex min-h-screen justify-center font-sans overflow-hidden">
-      <Container className="min-h-[200vh] px-8 pt-24 md:p-20 md:pb-10 mx-auto">
+      <Container className="min-h-screen px-8 pt-24 md:px-20 pb-16 mx-auto">
 
 
         <h1 className="text-neutral-900 dark:text-neutral-50 font-custom font-semibold text-3xl tracking-tight">

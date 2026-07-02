@@ -1,7 +1,7 @@
 "use client";
 
 // Refined ProjectCard with Ambient Backgrounds
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import type { ComponentType } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -151,11 +151,9 @@ const techNames: Record<TechKey, string> = {
 
 const ProjectCard = ({
   project,
-  idx,
   setActiveVideo,
 }: {
   project: Project;
-  idx: number;
   setActiveVideo: (video: string) => void;
 }) => {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
@@ -163,7 +161,13 @@ const ProjectCard = ({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    let active = true;
+    setTimeout(() => {
+      if (active) setMounted(true);
+    }, 0);
+    return () => {
+      active = false;
+    };
   }, []);
 
   const imageSrc = mounted && theme === 'light' && project.lightModeSrc
@@ -284,7 +288,7 @@ const ProjectCard = ({
               )}
             </div>
             <div className="flex items-center gap-3">
-              {project.title !== "Scribble3D" && project.title !== "Blueprint" && project.title !== "RepoLens" && project.title !== "Inquiro" && (
+              {project.live && (
                 <Globe
                   size={16}
                   onClick={(e) => { e.stopPropagation(); window.open(project.live, "_blank"); }}
@@ -424,7 +428,7 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
       ],
       // TODO: Update this project's GitHub URL if you have a fork or replacement
       github: "https://github.com/Harsh16gupta/Scribble3D-Sketch-to-3rd-",
-      live: "https://yourlive.com",
+      live: "",
       backgroundImage: "/image copy.png",
     },
     {
@@ -436,7 +440,7 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
       tech: ["next", "ts", "tailwind", "prisma", "bun", "node", "langchain", "rag"],
       // TODO: Update this project's GitHub URL if you have a fork or replacement
       github: "https://github.com/Harsh16gupta/Blueprint",
-      live: "https://motion-suite-site.vercel.app/",
+      live: "",
       backgroundImage: "/image copy 3.png",
     },
     {
@@ -456,7 +460,7 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
       ],
       // TODO: Update this project's GitHub URL if you have a fork or replacement
       github: "https://github.com/Harsh16gupta/Inquiro-",
-      live: "https://yourlive.com",
+      live: "",
       backgroundImage: "/image copy 4.png",
     },
     {
@@ -475,7 +479,7 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
       ],
       // TODO: Update this project's GitHub URL if you have a fork or replacement
       github: "https://github.com/Harsh16gupta/RepoLens-",
-      live: "https://motion-suite-site.vercel.app/",
+      live: "",
     },
     {
       title: "MotionSuite",
@@ -516,7 +520,6 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
           >
             <ProjectCard
               project={project}
-              idx={idx}
               setActiveVideo={setActiveVideo}
             />
           </motion.div>

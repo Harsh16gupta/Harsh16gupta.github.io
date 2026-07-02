@@ -41,7 +41,7 @@ export default function GetInTouch() {
                     </Link>
 
                     {/* TODO: Replace with your Cal.com booking link */}
-                    <Link href="https://cal.com/your-username/30min" target="_blank">
+                    <Link href="https://cal.com/harsh16gupta/30min" target="_blank">
                         <AnimatedButton className="group relative overflow-hidden rounded-lg 
                             bg-linear-to-b from-white to-neutral-100 dark:from-neutral-800 dark:to-neutral-900 
                             border border-neutral-200 dark:border-neutral-800 

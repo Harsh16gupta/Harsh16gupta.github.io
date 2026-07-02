@@ -5,12 +5,10 @@ import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import {
     LayoutDashboard,
-    FileText,
     Mail,
     Moon,
     Sun,
     Laptop,
-    Search,
     Code,
     ArrowUp,
     ArrowDown,

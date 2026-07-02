@@ -5,7 +5,7 @@ import Projects from "@/components/projects";
 
 export default function Home() {
   return (
-    <Container className="min-h-[200vh] px-8 pt-24 md:p-20 md:pb-10 mx-auto">
+    <Container className="min-h-screen px-8 pt-24 md:px-20 pb-16 mx-auto">
 
 
 

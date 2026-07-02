@@ -30,8 +30,8 @@
 @theme inline {
   --color-primary: var(--color-neutral-800);
   --color-secondary: var(--color-neutral-600);
-  --font-custom: "Instrument Serif", serif;
-  --font-custom2: "Instrument Sans", sans-serif;
+  --font-custom: var(--font-serif), "Instrument Serif", serif;
+  --font-custom2: var(--font-sans), "Instrument Sans", sans-serif;
   --color-border: var(--border);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);

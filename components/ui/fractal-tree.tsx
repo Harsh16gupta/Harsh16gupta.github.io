@@ -109,7 +109,7 @@ export default function FractalTree() {
                 p.y += p.fallSpeed;
 
                 // 2. Oscillating sway (horizontal)
-                let sway = Math.sin(time * p.swaySpeed + p.phase) * 0.15;
+                const sway = Math.sin(time * p.swaySpeed + p.phase) * 0.15;
                 p.x += sway;
 
                 // 3. Subtle mouse breeze displacement

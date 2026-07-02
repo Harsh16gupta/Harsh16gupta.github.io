@@ -35,7 +35,7 @@ const Navbar = () => {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 25 }}
-        className="absolute top-0 left-0 right-0 z-50 w-full bg-transparent"
+        className="sticky top-0 z-50 w-full bg-neutral-50/60 dark:bg-neutral-950/60 backdrop-blur-md"
       >
         <Container className="py-4 flex items-center justify-between border-b border-dashed border-neutral-300 dark:border-neutral-800 bg-transparent dark:bg-transparent px-8 md:px-20">
           {/* Left: Avatar & Brand */}
@@ -43,7 +43,7 @@ const Navbar = () => {
             <Link href="/" className="hover:scale-105 active:scale-95 transition-transform duration-200 flex items-center justify-center">
               <Image
                 className="w-7 h-7 rounded-full border border-neutral-300/80 dark:border-neutral-700/80 shadow-sm"
-                src="/Avatar11.jpg"
+                src="/Avatar12.jpg"
                 width={56}
                 height={56}
                 alt="Avatar"
@@ -60,7 +60,7 @@ const Navbar = () => {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="group flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-50 hover:bg-neutral-200/40 dark:hover:bg-neutral-800/40 transition-all duration-200"
+                  className="group flex items-center gap-2 px-2.5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-50 hover:bg-neutral-200/40 dark:hover:bg-neutral-800/40 transition-all duration-200"
                 >
                   <Icon size={14} className="group-hover:scale-110 transition-transform duration-200" />
                   <span className="text-xs sm:text-sm font-medium">{item.title}</span>

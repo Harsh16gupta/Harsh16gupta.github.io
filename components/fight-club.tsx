@@ -9,13 +9,12 @@ export default function FightClub() {
     const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
-        let interval: NodeJS.Timeout;
         let count = 0;
         const target = isHovered ? rule1 : rule7;
         
         // Matrix scramble effect
-        interval = setInterval(() => {
-            setText((prev) => {
+        const interval = setInterval(() => {
+            setText(() => {
                 return target
                     .split("")
                     .map((char, index) => {

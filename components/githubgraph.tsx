@@ -59,49 +59,104 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
               ? "author:Harsh16gupta type:pr is:open"
               : "author:Harsh16gupta type:pr is:closed is:unmerged";
 
-        const query = `query {
-          search(query: "${searchQuery}", type: ISSUE, first: 12) {
-            edges {
-              node {
-                ... on PullRequest {
-                  id
-                  title
-                  url
-                  repository {
-                    nameWithOwner
+        const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN || "";
+        let fetchedPRs: PR[] = [];
+
+        // 1. Try REST Search API (works without token, but uses token if available for higher rate limits)
+        try {
+          const headers: HeadersInit = {
+            "Accept": "application/vnd.github+json",
+          };
+          if (token) {
+            headers["Authorization"] = `Bearer ${token}`;
+          }
+
+          const restUrl = `https://api.github.com/search/issues?q=${encodeURIComponent(searchQuery)}&sort=created&order=desc&per_page=100`;
+          const response = await fetch(restUrl, { headers });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.items) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              fetchedPRs = data.items.map((item: any) => {
+                let prState = "OPEN";
+                if (item.pull_request?.merged_at) {
+                  prState = "MERGED";
+                } else if (item.state === "closed") {
+                  prState = "CLOSED";
+                }
+
+                return {
+                  id: item.id,
+                  title: item.title,
+                  url: item.html_url,
+                  repository: {
+                    nameWithOwner: item.repository_url.replace("https://api.github.com/repos/", "")
+                  },
+                  state: prState,
+                  createdAt: item.created_at,
+                  mergedAt: item.pull_request?.merged_at || undefined,
+                  closedAt: item.closed_at || undefined,
+                };
+              });
+            }
+          } else {
+            console.warn(`REST API failed with status ${response.status}. Trying GraphQL fallback...`);
+          }
+        } catch (restError) {
+          console.error("REST API fetch error:", restError);
+        }
+
+        // 2. Fallback to GraphQL if REST fails/returns empty, and a token is available
+        if (fetchedPRs.length === 0 && token) {
+          const query = `query {
+            search(query: "${searchQuery} sort:created-desc", type: ISSUE, first: 100) {
+              edges {
+                node {
+                  ... on PullRequest {
+                    id
+                    title
+                    url
+                    repository {
+                      nameWithOwner
+                    }
+                    state
+                    createdAt
+                    mergedAt
+                    closedAt
                   }
-                  state
-                  createdAt
-                  mergedAt
-                  closedAt
                 }
               }
             }
-          }
-        }`;
+          }`;
 
-        const response = await fetch("https://api.github.com/graphql", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN || ""}`,
-          },
-          body: JSON.stringify({ query }),
+          const response = await fetch("https://api.github.com/graphql", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({ query }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.data?.search?.edges) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              fetchedPRs = data.data.search.edges.map((edge: any) => edge.node);
+            }
+          }
+        }
+
+        // Sort by date (newest first)
+        fetchedPRs.sort((a: PR, b: PR) => {
+          const dateA = new Date(b.mergedAt || b.closedAt || b.createdAt).getTime();
+          const dateB = new Date(a.mergedAt || a.closedAt || a.createdAt).getTime();
+          return dateA - dateB;
         });
 
-        const data = await response.json();
-        if (data.data?.search?.edges) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const fetchedPRs = data.data.search.edges.map((edge: any) => edge.node);
-          // Sort by date (newest first)
-          fetchedPRs.sort((a: PR, b: PR) => {
-            const dateA = new Date(b.mergedAt || b.closedAt || b.createdAt).getTime();
-            const dateB = new Date(a.mergedAt || a.closedAt || a.createdAt).getTime();
-            return dateA - dateB;
-          });
-          setPrs(fetchedPRs);
-          setShowAll(false);
-        }
+        setPrs(fetchedPRs);
+        setShowAll(false);
       } catch (error) {
         console.error("Failed to fetch PRs:", error);
       } finally {

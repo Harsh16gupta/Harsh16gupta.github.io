@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Container from "@/components/containers";
 import { ThemeToggleButton } from "@/components/ui/skiper-ui/skiper26";
 import { CommandMenu } from "@/components/command-menu";
-import { Code, FileText, Search, Activity } from "lucide-react";
+import { Code, FileText, Search, Activity, FileDown } from "lucide-react";
 
 const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -21,6 +21,7 @@ const Navbar = () => {
     { title: "Projects", href: "/projects", icon: Code },
     { title: "Proof of Work", href: "/proof-of-work", icon: Activity },
     { title: "Blog", href: "/blog", icon: FileText },
+    { title: "Resume", href: "/resume.pdf", icon: FileDown, external: true },
   ];
 
   const triggerCommandMenu = () => {
@@ -60,6 +61,8 @@ const Navbar = () => {
                 <Link
                   key={item.title}
                   href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
                   className="group flex items-center gap-2 px-2.5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-50 hover:bg-neutral-200/40 dark:hover:bg-neutral-800/40 transition-all duration-200"
                 >
                   <Icon size={14} className="group-hover:scale-110 transition-transform duration-200" />

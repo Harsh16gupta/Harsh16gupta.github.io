@@ -26,19 +26,30 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
     try {
-      // TODO: Replace with your FormSubmit email address if needed
       const response = await fetch("https://formsubmit.co/ajax/harsh16official@gmail.com", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _captcha: "false",
+          _subject: "New Enquiry from Portfolio",
+        }),
       });
 
       if (response.ok) {
-        toast.success("Message sent! I'll get back to you soon.");
-        form.reset();
+        const data = await response.json();
+        if (data.success === "false") {
+          toast.error(data.message || "Form submission failed. Please ensure the form is activated.");
+        } else {
+          toast.success("Message sent! I'll get back to you soon.");
+          setFormData({ name: "", email: "", message: "" });
+        }
       } else {
         toast.error("Something went wrong. Please try again.");
       }

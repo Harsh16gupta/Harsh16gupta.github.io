@@ -14,14 +14,8 @@ import {
     SiKubernetes,
     SiGit,
     SiExpress,
-    SiLangchain,
-    SiGooglegemini,
-    SiOpenai,
-    SiClaude,
-    SiMeta,
     SiFastapi,
-    SiPytorch,
-    SiHuggingface,
+    SiLangchain,
     SiRedis,
     SiChartdotjs,
 } from "react-icons/si";
@@ -42,12 +36,6 @@ const skillCategories = [
             { name: "DSPy", icon: FaCode },
             { name: "Semantic Caching", icon: SiRedis },
             { name: "Structured Outputs", icon: FaTerminal },
-            { name: "Gemini", icon: SiGooglegemini },
-            { name: "Claude", icon: SiClaude },
-            { name: "OpenAI", icon: SiOpenai },
-            { name: "LLaMA", icon: SiMeta },
-            { name: "Hugging Face", icon: SiHuggingface },
-            { name: "PyTorch", icon: SiPytorch },
         ]
     },
     {

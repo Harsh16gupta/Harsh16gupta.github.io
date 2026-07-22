@@ -10,7 +10,10 @@ type TechKey =
   | "prisma"
   | "cloud"
   | "langchain"
-  | "node";
+  | "node"
+  | "transformers"
+  | "onnx"
+  | "python";
 
 
 
@@ -23,6 +26,9 @@ const techNames: Record<TechKey, string> = {
   cloud: "Cloudflare",
   langchain: "LangChain",
   node: "Node.js",
+  transformers: "Transformers.js",
+  onnx: "ONNX Runtime",
+  python: "Python",
 };
 
 type Data = {
@@ -55,16 +61,16 @@ export const Timeline = () => {
       content: [
         {
           title: "Google Summer of Code 2026",
-          subtitle: "AI Intern, Joplin",
+          subtitle: "Joplin",
           description: `
-            Built scalable solutions for open source organizations
-            Received mentorship from top engineers and industry experts
-            Contributed real-world features that impacted thousands of users
-            Optimized codebase performance and reduced technical debt significantly
+            Building an on-device note-categorization plugin using Transformers.js/ONNX, keeping all embedding computation local.
+            Designed a chunk-embed-average pipeline with cosine-similarity-based title weighting, selecting the BGE-small-en-v1.5 embedding model after benchmarking clustering accuracy, memory footprint, and inference speed.
+            Implemented semantic clustering with UMAP dimensionality reduction and multiple strategies (HDBSCAN, K-Medoids, K-Means), achieving a top clustering score of 0.94 across 7 auto-detected topic clusters.
+            Built a tag-suggestion pipeline combining TF-IDF keyword extraction with centroid cosine-similarity re-ranking to generate descriptive multi-word tags for each cluster.
           `,
           src: "/Experience-image/Google_Summer_of_Code_sun_logo_2022.svg%20(1).png",
           href: "https://summerofcode.withgoogle.com/",
-          tech: ["next", "ts", "react", "node"],
+          tech: ["transformers", "onnx", "python", "langchain"],
           dates: "May 2026 - Present",
           location: "Remote",
           imageFit: "contain",

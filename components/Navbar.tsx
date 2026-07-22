@@ -17,11 +17,10 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const navItems = [
+  const navItems: { title: string; href: string; icon: any; external?: boolean }[] = [
     { title: "Projects", href: "/projects", icon: Code },
     { title: "Proof of Work", href: "/proof-of-work", icon: Activity },
     { title: "Blog", href: "/blog", icon: FileText },
-    { title: "Resume", href: "/resume.pdf", icon: FileDown, external: true },
   ];
 
   const triggerCommandMenu = () => {

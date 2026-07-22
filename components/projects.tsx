@@ -31,10 +31,6 @@ import {
   SiTldraw,
   SiCss3,
   SiPython,
-  SiAnthropic,
-  SiClaude,
-  SiGooglegemini,
-  SiMeta,
 } from "react-icons/si";
 type TechIcon = ComponentType<{ className?: string }>;
 
@@ -61,11 +57,7 @@ type TechKey =
   | "celery"
   | "tldraw"
   | "css3"
-  | "python"
-  | "anthropic"
-  | "claude"
-  | "gemini"
-  | "llama";
+  | "python";
 
 type TechItem =
   | TechKey
@@ -85,6 +77,9 @@ interface Project {
   live: string;
   starsText?: string;
   backgroundImage?: string;
+  objectFit?: "cover" | "contain" | "fill";
+  imageScale?: string;
+  status?: "operational" | "building" | "planned";
 }
 
 const iconMap: Record<TechKey, TechIcon> = {
@@ -111,10 +106,6 @@ const iconMap: Record<TechKey, TechIcon> = {
   tldraw: SiTldraw,
   css3: SiCss3,
   python: SiPython,
-  anthropic: SiAnthropic,
-  claude: SiClaude,
-  gemini: SiGooglegemini,
-  llama: SiMeta,
 };
 
 const techNames: Record<TechKey, string> = {
@@ -141,10 +132,6 @@ const techNames: Record<TechKey, string> = {
   tldraw: "tldraw",
   css3: "CSS3",
   python: "Python",
-  anthropic: "Anthropic",
-  claude: "Claude",
-  gemini: "Gemini",
-  llama: "LLaMA",
 };
 
 
@@ -231,21 +218,23 @@ const ProjectCard = ({
             </motion.h1>
 
             {/* Play Button - Scales up with a nice bounce */}
-            <motion.div
-              onClick={(e) => { e.stopPropagation(); setActiveVideo(project.video); }}
-              className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto"
-              variants={{
-                rest: { scale: 0.5, opacity: 0 },
-                hover: { scale: 1, opacity: 1 },
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.05 }}
-            >
-              <div className="h-12 w-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200 border border-white/50">
-                <svg className="w-5 h-5 text-neutral-900 ml-0.5 fill-current" viewBox="0 0 24 24">
-                  <path d="M5.25 5.653v12.694c0 .856.926 1.39 1.668.958l11.1-6.347a1.125 1.125 0 000-1.916L6.918 4.695c-.742-.432-1.668.102-1.668.958z" />
-                </svg>
-              </div>
-            </motion.div>
+            {project.video && (
+              <motion.div
+                onClick={(e) => { e.stopPropagation(); setActiveVideo(project.video); }}
+                className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto"
+                variants={{
+                  rest: { scale: 0.5, opacity: 0 },
+                  hover: { scale: 1, opacity: 1 },
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.05 }}
+              >
+                <div className="h-12 w-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200 border border-white/50">
+                  <svg className="w-5 h-5 text-neutral-900 ml-0.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M5.25 5.653v12.694c0 .856.926 1.39 1.668.958l11.1-6.347a1.125 1.125 0 000-1.916L6.918 4.695c-.742-.432-1.668.102-1.668.958z" />
+                  </svg>
+                </div>
+              </motion.div>
+            )}
 
             {/* Floating screenshot */}
             <motion.div
@@ -262,7 +251,7 @@ const ProjectCard = ({
                   alt={`${project.title} preview`}
                   width={600}
                   height={400}
-                  className="size-full object-cover"
+                  className={`size-full ${project.objectFit === 'contain' ? 'object-contain' : 'object-cover'} ${project.imageScale || ''}`}
                 />
               </div>
             </motion.div>
@@ -354,18 +343,17 @@ const ProjectCard = ({
             </div>
 
             {(() => {
-              const isNotStarted = project.title === "Inquiro";
-              const isBuilding = project.title === "Blueprint";
+              const status = project.status || "operational";
 
-              const dotColor = isNotStarted
+              const dotColor = status === "planned"
                 ? "bg-neutral-400"
-                : isBuilding
-                ? "bg-red-500"
+                : status === "building"
+                ? "bg-amber-500"
                 : "bg-emerald-500";
 
-              const label = isNotStarted
-                ? "Not Started Yet"
-                : isBuilding
+              const label = status === "planned"
+                ? "Planned"
+                : status === "building"
                 ? "Building"
                 : "All Systems Operational";
 
@@ -400,98 +388,36 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
   // TODO: Replace these with your own projects. You can modify their titles, links, descriptions, and technology stack below.
   const projects: Project[] = [
     {
-      title: "VengenceUI",
-      src: "/project-image/image copy.png",
-      lightModeSrc: "/project-image/image.png",
-      video: "https://www.youtube.com/embed/Z-5Y1JQlrdw?si=hA_aQJ3Syv-_jzo0",
-      description: "VengenceUI helps you to build your landing page by providing you animated beautiful components",
-      tech: ["next", "react", "ts", "tailwind", "motion"],
-      // TODO: Update this project's GitHub URL if you have a fork or replacement
-      github: "https://github.com/Harsh16gupta/VengeanceUI",
-      live: "https://www.vengenceui.com/",
-      starsText: "500+ Github Stars",
+      title: "botforweb",
+      src: "/botforweb.png",
+      video: "",
+      description: "Your docs, turned into a fact-checked AI assistant. Upload PDFs and Markdown to get a citation-grounded chatbot live on your site in under 5 minutes.",
+      tech: ["next", "react", "ts", "tailwind", "cloud"],
+      github: "https://github.com/Harsh16gupta/botforweb",
+      live: "https://botforweb-website.harsh16official.workers.dev/",
       backgroundImage: "/image copy 5.png",
+      objectFit: "contain",
+      imageScale: "scale-[1.32]",
     },
     {
-      title: "Scribble3D",
-      src: "/Screenshot%202026-02-07%20234301.png",
-      lightModeSrc: "/Screenshot%202026-02-07%20234011.png",
-      video: "https://www.youtube.com/embed/vEW0auc6fXI?si=SEShsAG_h-e9kdnP",
-      description: "Turn your sketches into 3D objects and worlds — no 3D skills required.",
-      tech: [
-        "next",
-        "tldraw",
-        "three",
-        "ts",
-        "fastapi",
-        "gemini",
-      ],
-      // TODO: Update this project's GitHub URL if you have a fork or replacement
-      github: "https://github.com/Harsh16gupta/Scribble3D-Sketch-to-3rd-",
-      live: "",
+      title: "Chess",
+      src: "/chess.png",
+      video: "",
+      description: "Real-time multiplayer chess platform featuring live in-game chat, timed 5-min games, instant matchmaking, and puzzles.",
+      tech: ["next", "react", "ts", "tailwind", "node", "redis"],
+      github: "https://github.com/Harsh16gupta/chess",
+      live: "https://chess-gamma-beige.vercel.app/",
       backgroundImage: "/image copy.png",
     },
     {
-      title: "Blueprint",
-      src: "/Screenshot%202026-02-07%20233440.png",
-      lightModeSrc: "/Screenshot%202026-02-07%20233831.png",
+      title: "nimicode",
+      src: "/nimicode.png",
       video: "",
-      description: "Blueprint is an AI UI builder that turns prompts into structured, production-ready interfaces.",
-      tech: ["next", "ts", "tailwind", "prisma", "bun", "node", "langchain", "rag"],
-      // TODO: Update this project's GitHub URL if you have a fork or replacement
-      github: "https://github.com/Harsh16gupta/Blueprint",
-      live: "",
+      description: "The lightest, most steerable AI coding agent in your terminal. Dual-loop Planner-Executor architecture with 90% lower API bills.",
+      tech: ["ts", "bun", "python"],
+      github: "https://github.com/Harsh16gupta/nimicode",
+      live: "https://nimicode-web.harsh16official.workers.dev/",
       backgroundImage: "/image copy 3.png",
-    },
-    {
-      title: "Inquiro",
-      src: "/Screenshot 2026-02-07 011550.png",
-      lightModeSrc: "/Screenshot 2026-02-07 012511.png",
-      video: "/inquiro.mp4",
-      description: "Inquiro is a  AI-powered search engine that helps you find information on the internet",
-      tech: [
-        "next",
-        "ts",
-        "radixui",
-        "node",
-        "gemini",
-        "langchain",
-        "langgraph",
-      ],
-      // TODO: Update this project's GitHub URL if you have a fork or replacement
-      github: "https://github.com/Harsh16gupta/Inquiro-",
-      live: "",
-      backgroundImage: "/image copy 4.png",
-    },
-    {
-      title: "RepoLens",
-      src: "/Screenshot%202026-02-07%20225125.png",
-      lightModeSrc: "/Screenshot%202026-02-07%20225107.png",
-      video: "https://www.youtube.com/embed/nuE-KWBeauE?si=z-hrZjuMuFVfSxc5",
-      description: "An all-in-one GitHub explorer with tech stack insights, code browsing, and analytics.",
-      tech: [
-        "next",
-        "tailwind",
-        "radixui",
-        "charts",
-        "github",
-        "rag",
-      ],
-      // TODO: Update this project's GitHub URL if you have a fork or replacement
-      github: "https://github.com/Harsh16gupta/RepoLens-",
-      live: "",
-    },
-    {
-      title: "MotionSuite",
-      src: "/project-image/image copy 2.png",
-      lightModeSrc: "/project-image/image copy 3.png",
-      video: "/scribble.mp4",
-      description: "motion-suite is a lightweight animation toolkit for React + Framer Motion",
-      tech: ["ts", "next", "react", "motion"],
-      // TODO: Update this project's GitHub URL if you have a fork or replacement
-      github: "https://github.com/Harsh16gupta/Motion-SUITE",
-      live: "https://motion-suite-site.vercel.app/",
-      backgroundImage: "/image copy 2.png",
     },
   ];
 

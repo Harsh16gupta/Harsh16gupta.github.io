@@ -5,7 +5,6 @@
 @import "tailwindcss";
 /* remove this line if you don't have it installed */
 @import "tw-animate-css";
-@import "cal-heatmap/cal-heatmap.css";
 
 
 @custom-variant dark (&:is(.dark *));

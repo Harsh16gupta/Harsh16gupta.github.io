@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Container from "@/components/containers";
 import { ThemeToggleButton } from "@/components/ui/skiper-ui/skiper26";
 import { CommandMenu } from "@/components/command-menu";
-import { Code, FileText, Search, Activity, FileDown } from "lucide-react";
+import { Code, FileText, Search, Activity } from "lucide-react";
 
 const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -17,7 +17,7 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const navItems: { title: string; href: string; icon: any; external?: boolean }[] = [
+  const navItems: { title: string; href: string; icon: React.ComponentType<{ size?: number; className?: string }>; external?: boolean }[] = [
     { title: "Projects", href: "/projects", icon: Code },
     { title: "Proof of Work", href: "/proof-of-work", icon: Activity },
     { title: "Blog", href: "/blog", icon: FileText },

@@ -149,7 +149,7 @@ export const Timeline = () => {
               return (
                 <React.Fragment key={item.title}>
                   <div
-                    className="flex items-start sm:items-center gap-3 sm:gap-4 group py-3 cursor-pointer"
+                    className="flex items-start gap-3 sm:gap-4 group py-3 cursor-pointer"
                     onClick={() => setOpenIdx(isOpen ? null : idx * 100 + cidx)}
                   >
                     {/* Logo */}
@@ -167,43 +167,42 @@ export const Timeline = () => {
                         />
                       </div>
                     </div>
-                    {/* Main summary info */}
+
+                    {/* Title + Dates — stacked on mobile, side-by-side on sm+ */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-sm sm:text-base md:text-lg text-neutral-950 dark:text-neutral-50 truncate">
-                          {item.title}
-                        </span>
-                        {/* Optional: Full Time/Intern/Other badge */}
-                        {item.type && (
-                          <span className="ml-2 px-2 py-0.5 rounded bg-neutral-700 text-xs text-neutral-100 font-medium border border-neutral-600">
-                            {item.type}
+                      {/* Top line: Title + Date */}
+                      <div className="flex items-start sm:items-center justify-between gap-2">
+                        <div className="min-w-0">
+                          <span className="font-semibold text-sm sm:text-base md:text-lg text-neutral-950 dark:text-neutral-50 line-clamp-1">
+                            {item.title}
                           </span>
-                        )}
+                          {item.type && (
+                            <span className="ml-2 px-2 py-0.5 rounded bg-neutral-700 text-xs text-neutral-100 font-medium border border-neutral-600">
+                              {item.type}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-1 shrink-0">
+                          <div className="text-right">
+                            <div className="text-[10px] sm:text-xs md:text-sm font-semibold text-neutral-950 dark:text-neutral-50 whitespace-nowrap">
+                              {item.dates || item.title}
+                            </div>
+                            <div className="text-[10px] sm:text-xs text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
+                              {item.location || "Remote"}
+                            </div>
+                          </div>
+                          <FiChevronDown
+                            className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 stroke-[2.2] shrink-0 ${isOpen ? 'rotate-180 text-neutral-950 dark:text-neutral-50' : 'text-neutral-500 dark:text-neutral-500 group-hover:text-neutral-950 dark:group-hover:text-neutral-50'}`}
+                            aria-hidden="true"
+                          />
+                        </div>
                       </div>
+                      {/* Subtitle */}
                       {item.subtitle && (
                         <div className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5 font-medium">
                           {item.subtitle}
                         </div>
                       )}
-                    </div>
-                    {/* Dates and location */}
-                    <div className="text-right min-w-[80px] sm:min-w-[120px]">
-                      <div className="text-[10px] sm:text-xs md:text-sm font-semibold text-neutral-950 dark:text-neutral-50">
-                        {item.dates || item.title}
-                      </div>
-                      <div className="text-[10px] sm:text-xs text-neutral-600 dark:text-neutral-400">
-                        {item.location || "Remote"}
-                      </div>
-                    </div>
-                    {/* See/Arrow button */}
-                    <div
-                      className="ml-2 flex items-center justify-center w-7 h-7 p-0 bg-transparent border-none shadow-none focus:outline-none group"
-                    >
-                      <FiChevronDown
-                        className={`w-5 h-5 transition-transform duration-300 stroke-[2.2] ${isOpen ? 'rotate-180 text-neutral-950 dark:text-neutral-50' : 'text-neutral-500 dark:text-neutral-500 group-hover:text-neutral-950 dark:group-hover:text-neutral-50'}`}
-                        aria-hidden="true"
-                      />
-                      <span className="sr-only">{isOpen ? 'Hide details' : 'Show details'}</span>
                     </div>
                   </div>
                   {/* Details section with smooth accordion animation */}

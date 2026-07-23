@@ -174,9 +174,9 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
 
       <h1 className="text-neutral-900 dark:text-neutral-50 font-custom font-bold text-2xl sm:text-3xl tracking-tight py-2"><span className="link--elara">Proof Of Work</span></h1>
       <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-4 sm:-mx-6 md:-mx-12 lg:-mx-20"></div>
-      <p className="font-custom2 text-neutral-700 dark:text-neutral-300 mt-2 sm:mt-3 px-2 py-[7px]
-           text-xs sm:text-sm inline-block
-          bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border mb-4 sm:mb-6"> I live spending time in open source,building real stuff and solving real problems</p>
+      <p className="hidden sm:inline-block font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-2 py-[7px]
+           text-sm
+          bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border mb-6"> I live spending time in open source,building real stuff and solving real problems</p>
 
 
 

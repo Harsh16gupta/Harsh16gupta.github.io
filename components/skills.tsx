@@ -77,7 +77,7 @@ export default function Skills() {
             <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-4 sm:-mx-6 md:-mx-12 lg:-mx-20"></div>
 
             <div className="flex flex-col items-start space-y-3">
-                <p className="font-custom2 text-neutral-700 dark:text-neutral-300 mt-2 sm:mt-3 px-2 py-[7px] text-xs sm:text-sm inline-block bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border mb-4 sm:mb-6">
+                <p className="hidden sm:inline-block font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-2 py-[7px] text-sm bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border mb-6">
                     I love working with these technologies to build beautiful, functional, and intelligent applications.
                 </p>
 

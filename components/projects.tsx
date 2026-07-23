@@ -165,21 +165,20 @@ const ProjectCard = ({
 
   return (
     <motion.div
-      className="group relative z-10 rounded-xl border border-neutral-200 dark:border-neutral-800 p-2 sm:p-3 transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700 bg-white dark:bg-black hover:shadow-2xl hover:shadow-neutral-500/5"
+      className="group relative z-10 rounded-2xl sm:rounded-xl border border-neutral-200 dark:border-neutral-800 p-2.5 sm:p-3 transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700 bg-white dark:bg-black hover:shadow-2xl hover:shadow-neutral-500/5"
       initial="rest"
       whileHover="hover"
       animate="rest"
     >
       <div className="flex w-full cursor-pointer flex-col gap-4">
         {/* Image container wrapper - Clean style */}
-        <div className="rounded-[12px] border border-neutral-200 dark:border-neutral-800 p-[4px] bg-neutral-50 dark:bg-neutral-900/50">
-
+        <div className="rounded-xl sm:rounded-[12px] border border-neutral-200 dark:border-neutral-800 p-[3px] sm:p-[4px] bg-neutral-50 dark:bg-neutral-900/50 overflow-hidden">
           {/* Main Image container */}
-          <div className="relative h-[160px] sm:h-[190px] md:h-[220px] w-full overflow-hidden rounded-[8px] border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 select-none">
+          <div className="relative h-[180px] sm:h-[190px] md:h-[220px] w-full overflow-hidden rounded-lg sm:rounded-[8px] border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 select-none">
 
-            {/* Ambient Background - Image Style */}
+            {/* Ambient Background - only show on hover (desktop only) */}
             <motion.div
-              className="absolute inset-0 bg-cover bg-center"
+              className="absolute inset-0 bg-cover bg-center hidden sm:block"
               style={{
                 backgroundImage: `url('${project.backgroundImage || '/image.png'}')`,
                 backgroundSize: "cover",
@@ -192,10 +191,9 @@ const ProjectCard = ({
               transition={{ duration: 0.3, ease: "easeOut" }}
             />
 
-
-            {/* Title - Subtler slide */}
+            {/* Title - only show on hover (desktop only) */}
             <motion.h1
-              className="absolute top-2 left-2 text-[11px] font-bold font-custom text-neutral-500 dark:text-neutral-400 z-30 uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]"
+              className="absolute top-2 left-2 text-[11px] font-bold font-custom text-neutral-500 dark:text-neutral-400 z-30 uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] hidden sm:block"
               variants={{
                 rest: {
                   left: "0.75rem",
@@ -217,11 +215,11 @@ const ProjectCard = ({
               View Project
             </motion.h1>
 
-            {/* Play Button - Scales up with a nice bounce */}
+            {/* Play Button - only show on hover (desktop only) */}
             {project.video && (
               <motion.div
                 onClick={(e) => { e.stopPropagation(); setActiveVideo(project.video); }}
-                className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto"
+                className="absolute inset-0 z-40 hidden sm:flex items-center justify-center pointer-events-none group-hover:pointer-events-auto"
                 variants={{
                   rest: { scale: 0.5, opacity: 0 },
                   hover: { scale: 1, opacity: 1 },
@@ -236,47 +234,38 @@ const ProjectCard = ({
               </motion.div>
             )}
 
-            {/* Floating screenshot */}
-            <motion.div
-              className="absolute bottom-0 left-1/2 w-[82%] rounded-t-[6px] bg-white dark:bg-neutral-950 p-[2px] pb-0 shadow-2xl z-20 border-x border-t border-neutral-200 dark:border-neutral-800"
-              variants={{
-                rest: { height: "76%", y: 0, x: "-50%" },
-                hover: { height: "70%", y: 4, x: "-50%" }, // floats down/shrinks slightly
-              }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            >
-              <div className="size-full overflow-hidden rounded-t-[4px]">
-                <Image
-                  src={imageSrc}
-                  alt={`${project.title} preview`}
-                  width={600}
-                  height={400}
-                  className={`size-full ${project.objectFit === 'contain' ? 'object-contain' : 'object-cover'} ${project.imageScale || ''}`}
-                />
-              </div>
-            </motion.div>
+            {/* Floating screenshot — full-bleed on mobile, floating on desktop */}
+            <div className="absolute bottom-0 left-0 right-0 sm:left-1/2 sm:right-auto w-full sm:w-[82%] sm:-translate-x-1/2 h-full sm:h-[76%] z-20">
+              <motion.div
+                className="w-full h-full rounded-t-lg sm:rounded-t-[6px] bg-white dark:bg-neutral-950 p-0 sm:p-[2px] pb-0 sm:shadow-2xl sm:border-x sm:border-t sm:border-neutral-200 dark:sm:border-neutral-800"
+                variants={{
+                  rest: { y: 0 },
+                  hover: { y: 4 },
+                }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              >
+                <div className="size-full overflow-hidden rounded-t-lg sm:rounded-t-[4px]">
+                  <Image
+                    src={imageSrc}
+                    alt={`${project.title} preview`}
+                    width={600}
+                    height={400}
+                    className={`size-full ${project.objectFit === 'contain' ? 'object-contain' : 'object-cover'} ${project.imageScale || ''}`}
+                  />
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
 
         {/* Content area */}
-        <div className="flex flex-col gap-2 px-1">
+        <div className="flex flex-col gap-1.5 sm:gap-2 px-0.5 sm:px-1 pt-1">
+          {/* Title row — title left, icons right */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 min-w-0">
-              <h3 className="text-base sm:text-lg font-bold font-custom tracking-wide text-neutral-900 dark:text-neutral-100 transition-colors duration-300 truncate">
-                {project.title}
-              </h3>
-              {project.starsText && (
-                <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-50/80 dark:bg-neutral-900/40 px-2 py-0.5 text-[10px] font-medium font-custom2 text-neutral-700 dark:text-neutral-200 backdrop-blur">
-                  <Star
-                    size={12}
-                    fill="currentColor"
-                    className="text-amber-500/90 dark:text-amber-400"
-                  />
-                  <span>{project.starsText}</span>
-                </span>
-              )}
-            </div>
-            <div className="flex items-center gap-3">
+            <h3 className="text-lg sm:text-lg font-bold font-custom tracking-wide text-neutral-900 dark:text-neutral-100 transition-colors duration-300 truncate">
+              {project.title}
+            </h3>
+            <div className="flex items-center gap-3 shrink-0 ml-2">
               {project.live && (
                 <Globe
                   size={16}
@@ -292,70 +281,63 @@ const ProjectCard = ({
             </div>
           </div>
 
-          <p className="line-clamp-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-custom2 h-8 sm:h-10 group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors duration-300">
+          {/* Description */}
+          <p className="line-clamp-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-custom2 group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors duration-300">
             {project.description}
           </p>
 
-          <div className="flex items-center justify-between gap-3 pt-2">
-            <div className="flex gap-3 flex-wrap">
+          {/* Bottom row: Tech icons left, status badge right */}
+          <div className="flex items-center justify-between gap-3 pt-1 sm:pt-2">
+            <div className="flex gap-2.5 flex-wrap">
               {project.tech.map((item) => {
-              const key = typeof item === "string" ? item : item.label;
-              const isIconItem = typeof item === "string";
-              const tooltipText = isIconItem ? techNames[item] : (item.tooltip || item.label);
-              const uniqueId = `${project.title}-${key}`;
+                const key = typeof item === "string" ? item : item.label;
+                const isIconItem = typeof item === "string";
+                const tooltipText = isIconItem ? techNames[item] : (item.tooltip || item.label);
+                const uniqueId = `${project.title}-${key}`;
 
-              return (
-                <div
-                  key={key}
-                  className="relative"
-                  onMouseEnter={() => setHoveredTech(uniqueId)}
-                  onMouseLeave={() => setHoveredTech(null)}
-                >
-                  {isIconItem ? (
-                    (() => {
-                      const TechIcon = iconMap[item];
-                      return (
-                        <TechIcon className="w-4 h-4 text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" />
-                      );
-                    })()
-                  ) : (
-                    <span className="px-1.5 py-0.5 rounded border border-neutral-200 dark:border-neutral-800 text-[9px] font-custom2 text-neutral-500 dark:text-neutral-400 leading-none">
-                      {item.label}
-                    </span>
-                  )}
-                  <AnimatePresence>
-                    {hoveredTech === uniqueId && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 5 }}
-                        className="absolute -top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
-                      >
-                        <div className="bg-neutral-900 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-900 text-[10px] px-2 py-0.5 rounded shadow-xl whitespace-nowrap font-custom2">
-                          {tooltipText}
-                        </div>
-                      </motion.div>
+                return (
+                  <div
+                    key={key}
+                    className="relative"
+                    onMouseEnter={() => setHoveredTech(uniqueId)}
+                    onMouseLeave={() => setHoveredTech(null)}
+                  >
+                    {isIconItem ? (
+                      (() => {
+                        const TechIcon = iconMap[item];
+                        return (
+                          <TechIcon className="w-4 h-4 text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" />
+                        );
+                      })()
+                    ) : (
+                      <span className="px-1.5 py-0.5 rounded border border-neutral-200 dark:border-neutral-800 text-[9px] font-custom2 text-neutral-500 dark:text-neutral-400 leading-none">
+                        {item.label}
+                      </span>
                     )}
-                  </AnimatePresence>
-                </div>
-              );
+                    <AnimatePresence>
+                      {hoveredTech === uniqueId && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 5 }}
+                          className="absolute -top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+                        >
+                          <div className="bg-neutral-900 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-900 text-[10px] px-2 py-0.5 rounded shadow-xl whitespace-nowrap font-custom2">
+                            {tooltipText}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
               })}
             </div>
 
+            {/* Status badge — hidden on mobile, visible on sm+ */}
             {(() => {
               const status = project.status || "operational";
-
-              const dotColor = status === "planned"
-                ? "bg-neutral-400"
-                : status === "building"
-                ? "bg-amber-500"
-                : "bg-emerald-500";
-
-              const label = status === "planned"
-                ? "Planned"
-                : status === "building"
-                ? "Building"
-                : "All Systems Operational";
+              const dotColor = status === "planned" ? "bg-neutral-400" : status === "building" ? "bg-amber-500" : "bg-emerald-500";
+              const label = status === "planned" ? "Planned" : status === "building" ? "Building" : "All Systems Operational";
 
               return (
                 <span className="shrink-0 hidden sm:inline-flex items-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black px-3 py-1 text-[10px] font-medium font-custom2 text-neutral-700 dark:text-neutral-200">
@@ -425,18 +407,14 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
   return (
     <div className="mt-8">
       {/* Subtitle */}
-      <p
-        className="
-          font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-3 sm:px-4 py-[7px]
-          text-xs sm:text-sm inline-block
-          bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border
-        "
-      >
+      <p className="hidden sm:inline-block font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-4 py-[7px]
+   text-sm
+   bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border">
         I love designing and building thoughtful, production-grade applications.
       </p>
 
       {/* GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 py-6 sm:py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 py-4 sm:py-8">
         {(showAll ? projects : projects.slice(0, 2)).map((project, idx) => (
           <motion.div
             key={project.title}

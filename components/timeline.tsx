@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 type TechKey =
   | "next"
@@ -39,6 +40,7 @@ type Data = {
     subtitle?: string;
     description: string;
     src: string;
+    darkSrc?: string;
     href: string;
     tech?: TechKey[];
     type?: string;
@@ -52,6 +54,12 @@ type Data = {
 export const Timeline = () => {
   // Track which experience is open (by index)
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // TODO: Replace these with your own professional experience. You can modify the company names, descriptions, dates, and technology tags below.
   const data: Data[] = [
@@ -115,13 +123,13 @@ export const Timeline = () => {
             Integrated Twilio SMS, QR codes, Zod validation; cut data errors by 40%.
             Built UI with Radix UI, Framer Motion; optimized API with Turbopack and Server Actions.
           `,
-          src: "https://static.wixstatic.com/media/060b0c_8029055ce0074bfaa4bb6d9f1c2c33d2~mv2.png/v1/fill/w_2266,h_2168,al_c,q_95,usm_0.66_1.00_0.01,enc_auto/060b0c_8029055ce0074bfaa4bb6d9f1c2c33d2~mv2.png",
+          src: "/Experience-image/grs-blue-g.png",
           href: "https://grsworker.com/",
           tech: ["next", "prisma", "ts", "react", "node"],
           dates: "Sep 2025 - Nov 2025",
           location: "Delhi, India · Remote",
           imageFit: "contain",
-          imageZoom: 1.2,
+          imageZoom: 1.1,
         },
       ],
     }
@@ -137,6 +145,7 @@ export const Timeline = () => {
           <div key={year.title} className="relative pb-2 -mx-8 md:-mx-20 px-8 md:px-20">
             {year.content.map((item, cidx) => {
               const isOpen = openIdx === idx * 100 + cidx;
+              const logoSrc = mounted && theme === 'dark' && item.darkSrc ? item.darkSrc : item.src;
               return (
                 <React.Fragment key={item.title}>
                   <div
@@ -149,7 +158,7 @@ export const Timeline = () => {
                         className={`w-full h-full rounded-md border border-neutral-200/60 dark:border-neutral-700/70 overflow-hidden ${item.imageFit === 'contain' ? 'bg-neutral-50 dark:bg-neutral-50' : 'bg-neutral-50 dark:bg-neutral-900'}`}
                       >
                         <Image
-                          src={item.src}
+                          src={logoSrc}
                           alt={item.title}
                           width={48}
                           height={48}

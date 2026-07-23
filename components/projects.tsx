@@ -390,18 +390,18 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
     {
       title: "botforweb",
       src: "/botforweb.png",
+      lightModeSrc: "/botforweb-light.png",
       video: "",
       description: "Your docs, turned into a fact-checked AI assistant. Upload PDFs and Markdown to get a citation-grounded chatbot live on your site in under 5 minutes.",
       tech: ["next", "react", "ts", "tailwind", "cloud"],
       github: "https://github.com/Harsh16gupta/botforweb",
       live: "https://botforweb-website.harsh16official.workers.dev/",
       backgroundImage: "/image copy 5.png",
-      objectFit: "contain",
-      imageScale: "scale-[1.32]",
     },
     {
       title: "Chess",
       src: "/chess.png",
+      lightModeSrc: "/chess-light.png",
       video: "",
       description: "Real-time multiplayer chess platform featuring live in-game chat, timed 5-min games, instant matchmaking, and puzzles.",
       tech: ["next", "react", "ts", "tailwind", "node", "redis"],
@@ -412,6 +412,7 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
     {
       title: "nimicode",
       src: "/nimicode.png",
+      lightModeSrc: "/nimicode-light.png",
       video: "",
       description: "The lightest, most steerable AI coding agent in your terminal. Dual-loop Planner-Executor architecture with 90% lower API bills.",
       tech: ["ts", "bun", "python"],

@@ -136,24 +136,24 @@ export const Timeline = () => {
   ];
   return (
     <div>
-      <h1 className="text-3xl md:text-3xl font-bold font-custom tracking-tight text-neutral-950 dark:text-neutral-50 pb-2 mt-2">
+      <h1 className="text-2xl sm:text-3xl font-bold font-custom tracking-tight text-neutral-950 dark:text-neutral-50 pb-2 mt-2">
         <span className="link--elara">Experiences</span>
       </h1>
-      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-8 md:-mx-20"></div>
+      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-4 sm:-mx-6 md:-mx-12 lg:-mx-20"></div>
       <div className="flex flex-col gap-4">
         {data.map((year, idx) => (
-          <div key={year.title} className="relative pb-2 -mx-8 md:-mx-20 px-8 md:px-20">
+          <div key={year.title} className="relative pb-2 -mx-4 sm:-mx-6 md:-mx-12 lg:-mx-20 px-4 sm:px-6 md:px-12 lg:px-20">
             {year.content.map((item, cidx) => {
               const isOpen = openIdx === idx * 100 + cidx;
               const logoSrc = mounted && theme === 'dark' && item.darkSrc ? item.darkSrc : item.src;
               return (
                 <React.Fragment key={item.title}>
                   <div
-                    className="flex items-center gap-4 group py-3 cursor-pointer"
+                    className="flex items-start sm:items-center gap-3 sm:gap-4 group py-3 cursor-pointer"
                     onClick={() => setOpenIdx(isOpen ? null : idx * 100 + cidx)}
                   >
                     {/* Logo */}
-                    <div className="w-12 h-12 rounded-lg border border-neutral-200/80 dark:border-neutral-700 p-[2px] bg-neutral-50 dark:bg-neutral-900 shrink-0">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg border border-neutral-200/80 dark:border-neutral-700 p-[2px] bg-neutral-50 dark:bg-neutral-900 shrink-0">
                       <div
                         className={`w-full h-full rounded-md border border-neutral-200/60 dark:border-neutral-700/70 overflow-hidden ${item.imageFit === 'contain' ? 'bg-neutral-50 dark:bg-neutral-50' : 'bg-neutral-50 dark:bg-neutral-900'}`}
                       >
@@ -170,7 +170,7 @@ export const Timeline = () => {
                     {/* Main summary info */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-base md:text-lg text-neutral-950 dark:text-neutral-50 truncate">
+                        <span className="font-semibold text-sm sm:text-base md:text-lg text-neutral-950 dark:text-neutral-50 truncate">
                           {item.title}
                         </span>
                         {/* Optional: Full Time/Intern/Other badge */}
@@ -187,11 +187,11 @@ export const Timeline = () => {
                       )}
                     </div>
                     {/* Dates and location */}
-                    <div className="text-right min-w-[120px]">
-                      <div className="text-xs md:text-sm font-semibold text-neutral-950 dark:text-neutral-50">
+                    <div className="text-right min-w-[80px] sm:min-w-[120px]">
+                      <div className="text-[10px] sm:text-xs md:text-sm font-semibold text-neutral-950 dark:text-neutral-50">
                         {item.dates || item.title}
                       </div>
-                      <div className="text-xs text-neutral-600 dark:text-neutral-400">
+                      <div className="text-[10px] sm:text-xs text-neutral-600 dark:text-neutral-400">
                         {item.location || "Remote"}
                       </div>
                     </div>
@@ -213,7 +213,7 @@ export const Timeline = () => {
                     <div className="overflow-hidden">
                       {/* Inner container for padding control */}
                       <div className={`${isOpen ? 'py-4 opacity-100 translate-y-0' : 'py-0 opacity-0 -translate-y-2'} transition-all duration-500 ease-[cubic-bezier(0.33,1,0.68,1)]`}>
-                        <ul className="mb-4 list-disc list-inside pl-0 text-neutral-800 dark:text-neutral-200 text-sm space-y-2">
+                        <ul className="mb-4 list-disc list-inside pl-0 text-neutral-800 dark:text-neutral-200 text-xs sm:text-sm space-y-1.5 sm:space-y-2">
                           {item.description
                             .toString()
                             .split("\n")

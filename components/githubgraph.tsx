@@ -169,21 +169,21 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
 
   return (
     <div>
-      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-2 -mx-8 md:-mx-20"></div>
+      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-2 -mx-4 sm:-mx-6 md:-mx-12 lg:-mx-20"></div>
 
 
-      <h1 className="text-neutral-900 dark:text-neutral-50 font-custom font-bold  text-3xl tracking-tight  py-2"><span className="link--elara">Proof Of Work</span></h1>
-      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-8 md:-mx-20"></div>
-      <p className=" font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-2 py-[7px]
-           text-sm inline-block
-          bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border mb-6"> I live spending time in open source,building real stuff and solving real problems</p>
+      <h1 className="text-neutral-900 dark:text-neutral-50 font-custom font-bold text-2xl sm:text-3xl tracking-tight py-2"><span className="link--elara">Proof Of Work</span></h1>
+      <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-4 sm:-mx-6 md:-mx-12 lg:-mx-20"></div>
+      <p className="font-custom2 text-neutral-700 dark:text-neutral-300 mt-2 sm:mt-3 px-2 py-[7px]
+           text-xs sm:text-sm inline-block
+          bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border mb-4 sm:mb-6"> I live spending time in open source,building real stuff and solving real problems</p>
 
 
 
 
       {/* Graph Component */}
-      <div className="w-full flex justify-center">
-        <div className="flex w-full justify-center">
+      <div className="w-full flex justify-center overflow-x-auto">
+        <div className="flex w-full justify-center min-w-0">
           {mounted && (
             <>
               <GitHubCalendar
@@ -227,17 +227,17 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
               <span className="link--elara">Pull Requests</span>
             </h2>
             <div className="flex items-center gap-2">
-              <div className="relative grid grid-cols-4 p-1 bg-black/5 dark:bg-white/5 rounded-lg border border-neutral-300/30 dark:border-neutral-700/30 w-fit select-none">
+              <div className="relative grid grid-cols-4 p-0.5 sm:p-1 bg-black/5 dark:bg-white/5 rounded-lg border border-neutral-300/30 dark:border-neutral-700/30 w-fit select-none">
                 {/* Sliding Pill Background */}
                 <div
-                  className={`absolute top-1 bottom-1 left-1 w-[calc((100%-8px)/4)] rounded bg-white dark:bg-neutral-800 shadow-sm transition-transform duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] transform will-change-transform ${filterType === "all" ? "translate-x-0" : filterType === "merged" ? "translate-x-[100%]" : filterType === "open" ? "translate-x-[200%]" : "translate-x-[300%]"
+                  className={`absolute top-0.5 sm:top-1 bottom-0.5 sm:bottom-1 left-0.5 sm:left-1 w-[calc((100%-4px)/4)] sm:w-[calc((100%-8px)/4)] rounded bg-white dark:bg-neutral-800 shadow-sm transition-transform duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] transform will-change-transform ${filterType === "all" ? "translate-x-0" : filterType === "merged" ? "translate-x-[100%]" : filterType === "open" ? "translate-x-[200%]" : "translate-x-[300%]"
                     }`}
                 />
 
                 {/* Buttons */}
                 <button
                   onClick={() => setFilterType("all")}
-                  className={`z-10 relative px-3 py-1.5 text-xs font-medium text-center transition-colors duration-200 ${filterType === "all"
+                  className={`z-10 relative px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium text-center transition-colors duration-200 ${filterType === "all"
                     ? "text-neutral-900 dark:text-neutral-50"
                     : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
                     }`}
@@ -246,7 +246,7 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
                 </button>
                 <button
                   onClick={() => setFilterType("merged")}
-                  className={`z-10 relative px-3 py-1.5 text-xs font-medium text-center transition-colors duration-200 ${filterType === "merged"
+                  className={`z-10 relative px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium text-center transition-colors duration-200 ${filterType === "merged"
                     ? "text-neutral-900 dark:text-neutral-50"
                     : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
                     }`}
@@ -255,7 +255,7 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
                 </button>
                 <button
                   onClick={() => setFilterType("open")}
-                  className={`z-10 relative px-3 py-1.5 text-xs font-medium text-center transition-colors duration-200 ${filterType === "open"
+                  className={`z-10 relative px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium text-center transition-colors duration-200 ${filterType === "open"
                     ? "text-neutral-900 dark:text-neutral-50"
                     : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
                     }`}
@@ -264,7 +264,7 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
                 </button>
                 <button
                   onClick={() => setFilterType("closed")}
-                  className={`z-10 relative px-3 py-1.5 text-xs font-medium text-center transition-colors duration-200 ${filterType === "closed"
+                  className={`z-10 relative px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium text-center transition-colors duration-200 ${filterType === "closed"
                     ? "text-neutral-900 dark:text-neutral-50"
                     : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
                     }`}
@@ -283,7 +283,7 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
                   ? "Active pull requests"
                   : "Closed pull requests"}
           </p>
-          <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-8 md:-mx-20 mt-6"></div>
+          <div className="w-auto border-t border-dashed border-neutral-300 dark:border-neutral-800 mb-4 -mx-4 sm:-mx-6 md:-mx-12 lg:-mx-20 mt-6"></div>
 
           {loading ? (
             <div className="text-neutral-600 dark:text-neutral-400 font-custom2 text-sm mt-4">Loading pull requests...</div>
@@ -320,10 +320,10 @@ const GithubGraph = ({ showPRs = true }: GithubGraphProps) => {
                 <div className="flex justify-center mt-6">
                   <button
                     onClick={() => setShowAll(!showAll)}
-                    className="group relative overflow-hidden rounded-lg  w-full
+                    className="group relative overflow-hidden rounded-lg w-full
                             bg-linear-to-b from-white to-neutral-100 dark:from-neutral-800 dark:to-neutral-900 
                             border border-neutral-200 dark:border-neutral-800 
-                            text-neutral-800 dark:text-neutral-200 text-sm font-medium px-6 py-2.5 
+                            text-neutral-800 dark:text-neutral-200 text-xs sm:text-sm font-medium px-4 sm:px-6 py-2 sm:py-2.5 
                             transition-all duration-300 
                             hover:from-neutral-50 hover:to-neutral-100 dark:hover:from-neutral-800 dark:hover:to-neutral-800
                             shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,1)] 

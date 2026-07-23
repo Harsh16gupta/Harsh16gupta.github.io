@@ -5,7 +5,7 @@ import GithubGraph from "@/components/githubgraph";
 
 export default function ProofOfWorkPage() {
   return (
-    <Container className="min-h-screen px-8 pt-24 md:px-20 pb-16 mx-auto">
+    <Container className="min-h-screen px-4 pt-20 sm:px-6 sm:pt-24 md:px-12 lg:px-20 pb-12 sm:pb-16 mx-auto">
 
 
 

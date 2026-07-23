@@ -5,7 +5,7 @@ import { Github, Linkedin, Twitter } from "lucide-react";
 import DisplacementText from "@/components/ui/displacement-text";
 import { toast } from "sonner";
 import { FlightButton } from "@/components/ui/flight-button";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,6 +14,20 @@ export default function Contact() {
     email: "",
     message: "",
   });
+
+  const [displacementFontSize, setDisplacementFontSize] = useState(300);
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (window.innerWidth < 480) setDisplacementFontSize(100);
+      else if (window.innerWidth < 640) setDisplacementFontSize(140);
+      else if (window.innerWidth < 768) setDisplacementFontSize(200);
+      else setDisplacementFontSize(300);
+    };
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   const isFormValid = formData.name.trim() !== "" && formData.email.trim() !== "" && formData.message.trim() !== "";
 
@@ -62,13 +76,13 @@ export default function Contact() {
 
   return (
     <div className="relative flex min-h-screen justify-center font-sans overflow-hidden">
-      <Container className="min-h-screen px-8 pt-24 md:px-20 pb-16 mx-auto">
+      <Container className="min-h-screen px-4 pt-20 sm:px-6 sm:pt-24 md:px-12 lg:px-20 pb-12 sm:pb-16 mx-auto">
 
 
-        <h1 className="text-neutral-900 dark:text-neutral-50 font-custom font-semibold text-3xl tracking-tight">
+        <h1 className="text-neutral-900 dark:text-neutral-50 font-custom font-semibold text-2xl sm:text-3xl tracking-tight">
           <span className="link--elara">Contact</span>
         </h1>
-        <p className="tracking-tight font-custom2 text-neutral-600 dark:text-neutral-400 max-w-lg text-sm md:text-base mt-2 mb-12">
+        <p className="tracking-tight font-custom2 text-neutral-600 dark:text-neutral-400 max-w-lg text-xs sm:text-sm md:text-base mt-2 mb-8 sm:mb-12">
           Hi there — I’m currently open to meaningful work.
         </p>
 
@@ -138,7 +152,7 @@ export default function Contact() {
             </div>
           </form>
 
-          <div className="mt-10   flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400 font-custom2">
+          <div className="mt-6 sm:mt-10 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 text-xs text-neutral-500 dark:text-neutral-400 font-custom2">
             <div className="flex items-center gap-2">
               <p>Harsh</p>
             </div>
@@ -164,10 +178,10 @@ export default function Contact() {
 
 
 
-        <div className="w-full h-96 relative overflow-hidden flex items-center justify-center -mt-20">
+        <div className="w-full h-48 sm:h-64 md:h-80 lg:h-96 relative overflow-hidden flex items-center justify-center -mt-10 sm:-mt-16 md:-mt-20">
           <DisplacementText
             text="HARSH"
-            fontSize={300}
+            fontSize={displacementFontSize}
             className="h-full w-full"
             lightColor="#171717"
             darkColor="#e5e5e5"

@@ -178,3 +178,23 @@
     opacity: 0.12;
   }
 }
+
+/* === Responsive: Prevent horizontal overflow on mobile === */
+html, body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (hover: none) {
+  .link--elara:hover::before {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  .link--elara:hover {
+    transform: none;
+  }
+}

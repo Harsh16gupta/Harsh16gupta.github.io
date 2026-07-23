@@ -41,7 +41,7 @@ export default function FightClub() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <span className={`font-mono text-[10px] sm:text-[11px] tracking-widest transition-all duration-300 cursor-default uppercase
+            <span className={`font-mono text-[8px] sm:text-[10px] md:text-[11px] tracking-wider sm:tracking-widest transition-all duration-300 cursor-default uppercase
                 ${isHovered 
                     ? "text-pink-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.5)] font-semibold" 
                     : "text-neutral-400 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400"

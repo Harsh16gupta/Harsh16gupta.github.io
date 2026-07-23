@@ -165,7 +165,7 @@ const ProjectCard = ({
 
   return (
     <motion.div
-      className="group relative z-10 rounded-xl border border-neutral-200 dark:border-neutral-800 p-3 transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700 bg-white dark:bg-black hover:shadow-2xl hover:shadow-neutral-500/5"
+      className="group relative z-10 rounded-xl border border-neutral-200 dark:border-neutral-800 p-2 sm:p-3 transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700 bg-white dark:bg-black hover:shadow-2xl hover:shadow-neutral-500/5"
       initial="rest"
       whileHover="hover"
       animate="rest"
@@ -175,7 +175,7 @@ const ProjectCard = ({
         <div className="rounded-[12px] border border-neutral-200 dark:border-neutral-800 p-[4px] bg-neutral-50 dark:bg-neutral-900/50">
 
           {/* Main Image container */}
-          <div className="relative h-[220px] w-full overflow-hidden rounded-[8px] border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 select-none">
+          <div className="relative h-[160px] sm:h-[190px] md:h-[220px] w-full overflow-hidden rounded-[8px] border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 select-none">
 
             {/* Ambient Background - Image Style */}
             <motion.div
@@ -262,7 +262,7 @@ const ProjectCard = ({
         <div className="flex flex-col gap-2 px-1">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 min-w-0">
-              <h3 className="text-lg font-bold font-custom tracking-wide text-neutral-900 dark:text-neutral-100 transition-colors duration-300 truncate">
+              <h3 className="text-base sm:text-lg font-bold font-custom tracking-wide text-neutral-900 dark:text-neutral-100 transition-colors duration-300 truncate">
                 {project.title}
               </h3>
               {project.starsText && (
@@ -292,7 +292,7 @@ const ProjectCard = ({
             </div>
           </div>
 
-          <p className="line-clamp-2 text-sm text-neutral-600 dark:text-neutral-400 font-custom2 h-10 group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors duration-300">
+          <p className="line-clamp-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-custom2 h-8 sm:h-10 group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors duration-300">
             {project.description}
           </p>
 
@@ -358,7 +358,7 @@ const ProjectCard = ({
                 : "All Systems Operational";
 
               return (
-                <span className="shrink-0 inline-flex items-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black px-3 py-1 text-[10px] font-medium font-custom2 text-neutral-700 dark:text-neutral-200">
+                <span className="shrink-0 hidden sm:inline-flex items-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black px-3 py-1 text-[10px] font-medium font-custom2 text-neutral-700 dark:text-neutral-200">
                   <span className="relative flex h-2 w-2">
                     <span className={`absolute inline-flex h-full w-full rounded-full ${dotColor} animate-[statusDotPulse_2.6s_ease-in-out_infinite] motion-reduce:animate-none`} />
                     <span className={`relative inline-flex h-2 w-2 rounded-full ${dotColor}`} />
@@ -427,8 +427,8 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
       {/* Subtitle */}
       <p
         className="
-          font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-4 py-[7px]
-           text-sm inline-block
+          font-custom2 text-neutral-700 dark:text-neutral-300 mt-3 px-3 sm:px-4 py-[7px]
+          text-xs sm:text-sm inline-block
           bg-neutral-100 dark:bg-neutral-900 border-dashed border-neutral-300 dark:border-neutral-700 border
         "
       >
@@ -436,7 +436,7 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
       </p>
 
       {/* GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 py-6 sm:py-8">
         {(showAll ? projects : projects.slice(0, 2)).map((project, idx) => (
           <motion.div
             key={project.title}

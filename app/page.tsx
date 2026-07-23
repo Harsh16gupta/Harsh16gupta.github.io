@@ -10,7 +10,7 @@ import FightClub from "@/components/fight-club";
 export default function Home() {
   return (
     <div className="relative flex min-h-screen justify-center font-sans overflow-hidden">
-      <Container className="min-h-screen px-4 pt-8 sm:pt-12 md:pt-20 md:px-12 lg:px-20 pb-12 sm:pb-16 mx-auto">
+      <Container className="min-h-screen px-4 pt-12 sm:pt-14 md:pt-20 md:px-12 lg:px-20 pb-12 sm:pb-16 mx-auto">
 
 
         {/* Hero Section */}

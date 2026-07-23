@@ -44,7 +44,7 @@ export default function Hero() {
       className="relative pt-8 pb-6 sm:py-8 md:py-10 w-full select-none"
     >
       {/* MOBILE HERO (block md:hidden) */}
-      <div className="block md:hidden">
+      <div className="block md:hidden pt-3 sm:pt-2">
         {/* Top row: Photo + Name (side by side on mobile) */}
         <div className="flex items-center gap-4 sm:gap-6">
           {/* Profile Image */}

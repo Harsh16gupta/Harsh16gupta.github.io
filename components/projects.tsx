@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimatedButton from "@/components/ui/AnimatedButton";
 import { motion, AnimatePresence } from "framer-motion";
-import { Globe, Github, Star, X, Network, Search } from "lucide-react";
+import { Globe, Github, X, Network, Search } from "lucide-react";
 import {
   SiNextdotjs,
   SiTypescript,

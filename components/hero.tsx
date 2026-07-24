@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Github, Twitter, Linkedin, Mail, ArrowRight, Phone, FileDown, FileText } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail, ArrowRight, Phone, FileDown } from "lucide-react";
 import AnimatedButton from "@/components/ui/AnimatedButton";
 
 export default function Hero() {

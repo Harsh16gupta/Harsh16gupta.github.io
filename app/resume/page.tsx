@@ -1,9 +1,23 @@
-"use client";
-
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/containers";
 import { ArrowLeft, Download, FileText } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Resume",
+  description:
+    "Official Resume of Harsh Gupta (harsh16gupta) — AI Engineer & Full-Stack Developer.",
+  alternates: {
+    canonical: "/resume",
+  },
+  openGraph: {
+    title: "Resume | Harsh Gupta (harsh16gupta)",
+    description:
+      "Official Resume of Harsh Gupta (harsh16gupta) — AI Engineer & Full-Stack Developer.",
+    url: "https://harsh16gupta.github.io/resume",
+  },
+};
 
 export default function ResumePage() {
   return (
@@ -43,7 +57,7 @@ export default function ResumePage() {
 
         </div>
 
-        {/* Embedded PDF Viewer Container — Fixed Container Width matching Navbar/Footer, 60% default zoom */}
+        {/* Embedded PDF Viewer Container */}
         <div className="relative w-full h-[78vh] sm:h-[82vh] rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
           <object
             data="/resume.pdf#toolbar=1&navpanes=0&zoom=60"

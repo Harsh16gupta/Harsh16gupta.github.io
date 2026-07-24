@@ -58,7 +58,13 @@ export const Timeline = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    let active = true;
+    setTimeout(() => {
+      if (active) setMounted(true);
+    }, 0);
+    return () => {
+      active = false;
+    };
   }, []);
 
   // TODO: Replace these with your own professional experience. You can modify the company names, descriptions, dates, and technology tags below.

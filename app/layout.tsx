@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     images: ["/Avatar12.jpg"],
   },
   verification: {
-    google: "O_VuE1Fz_NyK6AtJDHPy8oir6egZz27vu36Jr0ktlJY",
+    google: "H-BsxHgTeIIBVZnVZ8jAZBBEdFq4ZLQwwOxZTSHIi6E",
   },
   robots: {
     index: true,

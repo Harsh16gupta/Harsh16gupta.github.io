@@ -79,6 +79,9 @@ export const metadata: Metadata = {
     creator: "@Harsh16Gupta",
     images: ["/Avatar12.jpg"],
   },
+  verification: {
+    google: "O_VuE1Fz_NyK6AtJDHPy8oir6egZz27vu36Jr0ktlJY",
+  },
   robots: {
     index: true,
     follow: true,

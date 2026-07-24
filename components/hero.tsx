@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Github, Twitter, Linkedin, Mail, ArrowRight, Phone, FileDown } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail, ArrowRight, Phone, FileDown, FileText } from "lucide-react";
 import AnimatedButton from "@/components/ui/AnimatedButton";
 
 export default function Hero() {
@@ -30,9 +30,9 @@ export default function Hero() {
       action: () => (window.location.href = "mailto:harsh16official@gmail.com"),
     },
     {
-      name: "Download Resume",
+      name: "Resume",
       icon: FileDown,
-      action: () => window.open("/resume.pdf", "_blank"),
+      action: () => (window.location.href = "/resume"),
     },
   ];
 

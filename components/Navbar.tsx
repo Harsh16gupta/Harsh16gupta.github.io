@@ -20,6 +20,7 @@ const Navbar = () => {
   const navItems: { title: string; href: string; icon: React.ComponentType<{ size?: number; className?: string }>; external?: boolean }[] = [
     { title: "Projects", href: "/projects", icon: Code },
     { title: "Proof of Work", href: "/proof-of-work", icon: Activity },
+    { title: "Resume", href: "/resume", icon: FileText },
     { title: "Blog", href: "/blog", icon: FileText },
   ];
 

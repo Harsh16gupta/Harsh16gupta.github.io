@@ -2,7 +2,8 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/containers";
-import { ArrowLeft, Download, FileText } from "lucide-react";
+import ResumeViewer from "@/components/resume-viewer";
+import { ArrowLeft, FileText } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -45,42 +46,13 @@ export default function ResumePage() {
             </div>
           </div>
 
-          {/* Right: Download Action */}
-          <div className="flex items-center gap-2">
-            <a href="/resume.pdf" download="Harsh_Gupta_Resume.pdf">
-              <button className="group relative flex items-center gap-2 overflow-hidden rounded-lg bg-neutral-900 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-950 text-xs sm:text-sm font-medium px-4 py-2 shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer border border-transparent">
-                <Download className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span>Download PDF</span>
-              </button>
-            </a>
-          </div>
-
         </div>
 
-        {/* Embedded PDF Viewer Container */}
-        <div className="relative w-full h-[78vh] sm:h-[82vh] rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
-          <object
-            data="/resume.pdf#toolbar=1&navpanes=0&zoom=60"
-            type="application/pdf"
-            className="w-full h-full"
-          >
-            <div className="flex flex-col items-center justify-center h-full gap-4 p-6 text-center">
-              <FileText className="w-12 h-12 text-neutral-400" />
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                Direct preview unavailable on this device.
-              </p>
-              <a
-                href="/resume.pdf"
-                download="Harsh_Gupta_Resume.pdf"
-                className="px-4 py-2 text-sm font-medium text-white bg-neutral-900 rounded-lg hover:bg-neutral-800"
-              >
-                Download Resume PDF
-              </a>
-            </div>
-          </object>
-        </div>
+        {/* Resume Viewer Container */}
+        <ResumeViewer />
 
       </Container>
     </div>
   );
 }
+

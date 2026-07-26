@@ -21,7 +21,6 @@ const Navbar = () => {
     { title: "Projects", href: "/projects", icon: Code },
     { title: "Proof of Work", href: "/proof-of-work", icon: Activity },
     { title: "Resume", href: "/resume", icon: FileText },
-    { title: "Blog", href: "/blog", icon: FileText },
   ];
 
   const triggerCommandMenu = () => {
@@ -63,11 +62,11 @@ const Navbar = () => {
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
-                  className="group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-2.5 py-2 sm:py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-50 hover:bg-neutral-200/40 dark:hover:bg-neutral-800/40 transition-all duration-200"
+                  className="group flex items-center gap-1.5 sm:gap-2 px-2 sm:px-2.5 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-50 hover:bg-neutral-200/40 dark:hover:bg-neutral-800/40 transition-all duration-200"
                   title={item.title}
                 >
-                  <Icon size={16} className="sm:w-3.5 sm:h-3.5 group-hover:scale-110 transition-transform duration-200" />
-                  <span className="hidden sm:inline text-xs md:text-sm font-medium">{item.title}</span>
+                  <Icon size={15} className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-200" />
+                  <span className="text-xs md:text-sm font-medium">{item.title}</span>
                 </Link>
               );
             })}
